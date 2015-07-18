@@ -1,4 +1,14 @@
 class window.AppView extends Backbone.View
+  initialize: ->
+    @render()
+    @model.on 'change', => @render()
+
+  render: ->
+    console.log 'render'
+    @$el.children().detach()
+    @$el.html new GameView({model: @model.get('currentGame')}).el   
+  
+  
   # template: _.template '
   #   <button class="hit-button">Hit</button> <button class="stand-button">Stand</button>
   #   <div class="player-hand-container"></div>

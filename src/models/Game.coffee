@@ -13,10 +13,9 @@ class window.Game extends Backbone.Model
     # math of the scors
     player = @get 'playerHand'
     pScore = @getHighScore(player.scores())
-
-    if isPlayer?
-      if pScore is 21 then console.log 'stand' 
-      if pScore > 21 then console.log 'lose'
+    
+    if pScore is 21 then player.stand()
+    if pScore > 21 then @endGame 'Player loses'
 
 
       # if dealerscore higher than 21 - loose
@@ -48,6 +47,8 @@ class window.Game extends Backbone.Model
 
   endGame: (outcome) ->
     alert outcome
+    # Reset the game.. 
+    @trigger 'ended'
 
   
   
