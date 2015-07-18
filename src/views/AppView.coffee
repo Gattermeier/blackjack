@@ -1,9 +1,29 @@
-class window.AppView extends Backbone.View
-  template: _.template '    
-    <div class="scoreboard"></div>
-    <div class="bet"></div>
-    <input type="text" id="betting"><button type="button" id="startgame">Start Game</button>
-    <div class="gameboard"></div>
+class window.AppView extends Backbone.View 
+  className: 'main container'
+
+  template: _.template '
+    <div class="title row"><div class="col-xs-12">BlackJack.io</div></div>    
+    <div class="row">
+      <div class="box scorebox col-xs-6"> 
+      Current Score: <span class="scoreboard"></span>
+      </div>
+      <div class="box betbox col-xs-6">
+      Your current bet: <span class="bet"></span>
+      </div>
+    <div class="col-xs-12 col-sm-6"> 
+    <form class="form-inline">
+      <div class="form-group col-xs-12 col-sm-6" style="padding:0">
+        <label class="sr-only" for="betting">Amount (in dollars)</label>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input type="text" class="form-control" id="betting" placeholder="Amount">
+        </div>
+      </div>
+      <button type="button" id="startgame" class="btn btn-primary col-xs-12 col-sm-3">Place bet</button>
+    </form>
+    </div>
+    </div>
+    <div class="gameboard row"></div>
   '
   initialize: ->
     @renderBasics()

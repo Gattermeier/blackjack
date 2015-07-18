@@ -26,3 +26,25 @@
 .hand {
   overflow: auto;
 }
+
+
+.gameboard {
+  margin-top: 1em;
+}
+
+.box {
+  padding:8px;
+}
+
+.betbox {
+  float:right;
+}
+
+.title {
+  padding:10px;
+  text-align: center;
+  background: #444;
+  color: #FF7777;
+  font-family: Arial;
+  font-size: 24px;
+}
