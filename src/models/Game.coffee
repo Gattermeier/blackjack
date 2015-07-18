@@ -25,15 +25,19 @@ class window.Game extends Backbone.Model
 
   dealerPlays: ->
     dealer = @get 'dealerHand'
-    dScore = @getHighScore(dealer.scores())
+    player = @get 'playerHand'
     dealer.at(0).flip()
-    while @calculate() 
+    dScore = @getHighScore(dealer.scores())
+    pScore = @getHighScore(player.scores())
+    while @calculate(dScore, pScore)
+      debugger; 
       dealer.hit()
+      dScore = @getHighScore(dealer.scores())
 
   calculate: (dScore,pScore) ->
-    if dScore > 21 then endGame 'Dealer loses'; return false 
-    if dScore > pScore then endGame 'dealer wins'; return false
-    if dScore is 21 and pScore is 21 then endGame 'push'; return false
+    if dScore > 21 then @endGame 'Dealer loses'; return false 
+    if dScore > pScore then @endGame 'dealer wins'; return false
+    if dScore is 21 and pScore is 21 then @endGame 'push'; return false
     return true
 
   getHighScore: (scoresArray) ->
