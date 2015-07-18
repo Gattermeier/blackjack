@@ -1,5 +1,6 @@
 class window.Game extends Backbone.Model
   initialize: ->
+    console.log('NEW GAME STARTED')
     @set 'deck', deck = new Deck()
     @set 'playerHand', deck.dealPlayer()
     @set 'dealerHand', deck.dealDealer()
@@ -15,7 +16,7 @@ class window.Game extends Backbone.Model
     pScore = @getHighScore(player.scores())
     
     if pScore is 21 then player.stand()
-    if pScore > 21 then @endGame 'Player loses'
+    if pScore > 21 then @endGame 'Dealer'
 
 
       # if dealerscore higher than 21 - loose
@@ -29,14 +30,13 @@ class window.Game extends Backbone.Model
     dScore = @getHighScore(dealer.scores())
     pScore = @getHighScore(player.scores())
     while @calculate(dScore, pScore)
-      debugger; 
       dealer.hit()
       dScore = @getHighScore(dealer.scores())
 
   calculate: (dScore,pScore) ->
-    if dScore > 21 then @endGame 'Dealer loses'; return false 
-    if dScore > pScore then @endGame 'dealer wins'; return false
-    if dScore is 21 and pScore is 21 then @endGame 'push'; return false
+    if dScore > 21 then @endGame 'Player'; return false 
+    if dScore > pScore then @endGame 'Dealer'; return false
+    if dScore is 21 and pScore is 21 then @endGame 'Push'; return false
     return true
 
   getHighScore: (scoresArray) ->
@@ -46,9 +46,10 @@ class window.Game extends Backbone.Model
     finalScore
 
   endGame: (outcome) ->
-    alert outcome
+    if outcome is 'Push' then alert outcome
+    else alert outcome + ' wins'
     # Reset the game.. 
-    @trigger 'ended'
+    @trigger 'ended', outcome
 
   
   
