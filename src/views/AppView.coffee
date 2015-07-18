@@ -1,12 +1,18 @@
 class window.AppView extends Backbone.View
+  template: _.template '    
+    <div class="scoreboard"></div>
+    <div class="gameboard"></div>
+  '
+
   initialize: ->
     @render()
     @model.on 'change', => @render()
 
   render: ->
-    console.log 'render'
     @$el.children().detach()
-    @$el.html new GameView({model: @model.get('currentGame')}).el   
+    @$el.html @template()
+    @$el.find('.scoreboard').html '4'
+    @$el.find('.gameboard').html new GameView({model: @model.get('currentGame')}).el   
   
   
   # template: _.template '
